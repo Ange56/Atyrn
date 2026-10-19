@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Atyrn</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="stage">
+
+  <aside class="side">
+    <span class="brand">atyrn<span>.</span></span>
+    <span class="motto">Less communication, more efficiency.</span>
+    <div class="dots" id="dots" aria-label="Prototype screens">
+      <button type="button" data-go="welcome" aria-current="true">Anonymity</button>
+      <button type="button" data-go="digest" aria-current="false">Summary</button>
+      <button type="button" data-go="map" aria-current="false">Navigation</button>
+      <button type="button" data-go="auto" aria-current="false">Autopilot</button>
+      <button type="button" data-go="play" aria-current="false">Challenges</button>
+      <button type="button" data-go="avoid" aria-current="false">De-meeting</button>
+    </div>
+    <span class="count" id="cap-count"></span>
+    <h2 id="cap-title"></h2>
+    <p class="muted" id="cap-text"></p>
+  </aside>
+
+  <div class="phone">
+    <div class="screens">
+
+      <!-- Welcome -->
+      <section class="screen welcome" id="s-welcome">
+        <div class="top"><span class="brand">atyrn<span>.</span></span><button class="pill" id="theme" type="button">Theme</button></div>
+        <div class="ghost" aria-hidden="true">nobody</div>
+        <h1>A social app… for people who don’t want to be social.</h1>
+        <p class="muted">Atyrn removes unnecessary interactions, filters useless information and helps you move through life without the stress of constant communication.</p>
+        <div class="nope">
+          <div><s>Username</s><i>not needed</i></div>
+          <div><s>Photo</s><i>not needed</i></div>
+          <div><s>Profile</s><i>not needed</i></div>
+        </div>
+        <div class="apps" aria-label="Connected apps">
+          <span class="pill on">WhatsApp</span><span class="pill on">Instagram</span><span class="pill">Messenger</span><span class="pill">SMS</span>
+        </div>
+        <button class="btn primary block" type="button" data-go="digest">Enter the prototype</button>
+        <p class="muted small">Concept prototype. All messages, names and routes on screen are made up.</p>
+      </section>
+
+      <!-- Digest -->
+      <section class="screen" id="s-digest" hidden>
+        <div class="top"><h2>Your chats</h2><span class="pill on">Atyrn on</span></div>
+        <div class="seg" id="src" role="group" aria-label="App">
+          <button type="button" data-src="whatsapp" aria-pressed="true">WhatsApp</button>
+          <button type="button" data-src="instagram" aria-pressed="false">Instagram</button>
+          <button type="button" data-src="feed" aria-pressed="false">Feed</button>
+        </div>
+        <p class="small muted" id="hint"></p>
+        <div class="chat" id="chat">
+          <div class="chat-h"><div><span class="app" id="chat-app"></span><br><b id="chat-name"></b></div><span class="unread" id="chat-unread"></span></div>
+          <div class="msgs" id="msgs"></div>
+          <button class="fab" id="fab" type="button"><i>a</i>Summarize</button>
+        </div>
+        <div class="chat feed" id="feed" hidden>
+          <div class="chat-h"><div><span class="app">Instagram · feed</span><br><b id="feed-acc"></b></div><span class="unread" id="feed-new"></span></div>
+          <div class="msgs" id="posts"></div>
+          <button class="fab" id="fab-feed" type="button"><i>a</i>Summarize</button>
+        </div>
+        <div class="sheet" id="sheet" hidden>
+          <div class="digest"><span class="mono" id="d-count"></span><strong id="d-head"></strong></div>
+          <div class="card"><h3>Needs your answer</h3><div id="d-asks"></div>
+            <div class="replies" id="d-replies"></div>
+            <div class="sent" id="sent" hidden><span class="mono">Atyrn replied for you</span><span id="sent-text"></span><span class="muted small" id="sent-cal"></span></div>
+          </div>
+          <div class="card"><h3>Decided</h3><div id="d-decided"></div></div>
+          <div class="saved"><span id="d-muted"></span></div>
+          <button class="btn block" id="back-chat" type="button">Back to the chat</button>
+        </div>
+        <div class="sheet" id="sheet-feed" hidden>
+          <div class="digest"><span class="mono" id="f-count"></span><strong id="f-head"></strong></div>
+          <div class="card"><h3>I follow for</h3><div class="chips" id="f-int"></div><p class="small muted">Tap to change what Atyrn keeps.</p></div>
+          <div class="card"><h3>To know</h3><div id="f-items"></div></div>
+          <div class="saved"><span id="f-muted"></span></div>
+          <button class="btn block" id="back-feed" type="button">Back to the feed</button>
+        </div>
+      </section>
+
+      <!-- Map -->
+      <section class="screen" id="s-map" hidden>
+        <div class="top"><h2>Anti-social map</h2><span class="pill">Simulation</span></div>
+        <svg class="map" viewBox="0 0 360 282" role="img" aria-label="Map with a direct route, a calm route and a route avoiding one person">
+          <g id="blocks"></g>
+          <rect class="shop" x="57" y="156" width="126" height="12" rx="6"/>
+          <circle class="crowd" cx="150" cy="110" r="28"/>
+          <text class="lab w" x="66" y="150">SHOPPING STREET</text>
+          <text class="lab w" x="150" y="113" text-anchor="middle">MARKET</text>
+          <circle class="zone off" id="zone" cx="234" cy="240" r="30"/>
+          <text class="lab r" id="zone-l" x="234" y="243" text-anchor="middle" style="display:none">PERSON A</text>
+          <path class="rt" id="rt-direct" d="M63 266 V162 H177 V58 H291"/>
+          <path class="rt hide" id="rt-calm" d="M63 266 H234 V214 H348 V58 H291"/>
+          <path class="rt hide" id="rt-detour" d="M63 266 V214 H6 V6 H291 V58"/>
+          <circle class="pt" cx="63" cy="266" r="12"/><text class="ptt" x="63" y="270">A</text>
+          <circle class="pt" cx="291" cy="58" r="12"/><text class="ptt" x="291" y="62">B</text>
+        </svg>
+        <div class="card">
+          <button class="switch" id="m-sw-calm" type="button" role="switch" aria-checked="false"><span><b>Anti-social mode</b><br><span class="muted small">Fewest people possible</span></span><span class="sw"></span></button>
+          <button class="switch" id="m-sw-avoid" type="button" role="switch" aria-checked="false"><span><b>Avoid Person A</b><br><span class="muted small">A colleague, around lunch</span></span><span class="sw"></span></button>
+        </div>
+        <div class="cmp">
+          <div class="card"><span class="eyebrow">Direct</span><span class="big" id="m-d-min"></span><span class="small muted" id="m-d-p"></span></div>
+          <div class="card" style="border-color:var(--accent)"><span class="eyebrow" id="m-c-t"></span><span class="big" id="m-c-min"></span><span class="small muted" id="m-c-p"></span></div>
+        </div>
+        <div class="alert" id="m-alert"></div>
+      </section>
+
+      <!-- Autopilot -->
+      <section class="screen" id="s-auto" hidden>
+        <div class="top"><h2>Social autopilot</h2><span class="pill on">On</span></div>
+        <div class="card">
+          <h3>Automatic answers</h3>
+          <button class="switch sw-toggle" type="button" role="switch" aria-checked="true"><span>Family invitations<br><span class="muted small">Say “I’m in” when I’m free</span></span><span class="sw"></span></button>
+          <button class="switch sw-toggle" type="button" role="switch" aria-checked="false"><span>Friends’ invitations<br><span class="muted small">Ask me first</span></span><span class="sw"></span></button>
+          <button class="switch sw-toggle" type="button" role="switch" aria-checked="true"><span>Work chats<br><span class="muted small">Reply “Noted, thanks”</span></span><span class="sw"></span></button>
+        </div>
+        <div class="card">
+          <h3>New invitation</h3>
+          <p>“Drinks on Friday at 7 PM?” <span class="muted small">· Group chat</span></p>
+          <button class="btn primary" id="let-answer" type="button">Let Atyrn answer</button>
+          <div class="sent" id="answered" hidden><span class="mono">Atyrn replied for you</span><span>“Sorry, I can’t this time. Have fun!”</span></div>
+        </div>
+        <div class="card">
+          <h3>Best date for the party</h3>
+          <div class="days" id="days"></div>
+          <p class="small muted">Atyrn compared everyone’s free days and proposes Saturday 17.</p>
+        </div>
+        <div class="card">
+          <h3>Birthday</h3>
+          <p>Sam’s birthday is in 3 days.</p>
+          <div class="sent"><span class="mono">Message ready</span><span>“Happy birthday Sam! Have a great day.”</span></div>
+          <button class="btn sm" id="bday-send" type="button">Send</button>
+        </div>
+        <div class="card">
+          <h3>Polite excuse</h3>
+          <div class="chips" id="exc"><button class="chip" type="button" data-k="tired" aria-pressed="false">Tired</button><button class="chip" type="button" data-k="busy" aria-pressed="false">Already busy</button><button class="chip" type="button" data-k="far" aria-pressed="false">Too far</button></div>
+          <div class="sent" id="exc-out" hidden></div>
+        </div>
+      </section>
+
+      <!-- De-meeting -->
+      <section class="screen" id="s-avoid" hidden>
+        <div class="top"><h2>De-meeting</h2><span class="pill">Anonymous</span></div>
+        <div class="alert bad"><b>Heads up.</b> Person A usually leaves the office at 12:15 and walks past your usual cafe. Leave at 12:40 instead.<br><button class="btn sm" id="av-remind" type="button" aria-pressed="false" style="margin-top:.6rem">Remind me at 12:40</button></div>
+        <div class="card"><h3>People to avoid</h3><div id="av-list"></div></div>
+        <div class="card"><h3>Add someone</h3><p class="small muted">Use a code name. No photo, no real name.</p>
+          <input type="text" id="av-code" placeholder="Code name, e.g. Person C" maxlength="12" aria-label="Code name">
+          <button class="btn primary" id="av-add" type="button">Add to my list</button></div>
+      </section>
+
+      <!-- Challenges -->
+      <section class="screen" id="s-play" hidden>
+        <div class="top"><h2>Challenges</h2><span class="pill" id="done-n"></span></div>
+        <div class="card"><div class="row"><h3 id="lv"></h3><span class="pill on" id="xp"></span></div><div class="bar" aria-hidden="true"><i id="xp-bar" style="width:0"></i></div><p class="small muted">Each challenge is worth 10 XP.</p></div>
+        <div class="card" id="chs">
+          <button class="ch" type="button" aria-pressed="false"><span class="tick"></span><span><b>0 interaction today</b><br><span class="muted small">No message sent, no call made</span></span></button>
+          <button class="ch" id="ch-route" type="button" aria-pressed="false"><span class="tick"></span><span><b>Avoid-everyone route</b><br><span class="muted small">Reach B without crossing anyone</span></span></button>
+          <button class="ch" type="button" aria-pressed="false"><span class="tick"></span><span><b>Conversation summary challenge</b><br><span class="muted small">Summarize 3 chats</span></span></button>
+        </div>
+        <div class="card"><h3>Badges</h3>
+          <div class="badges">
+            <div class="bd on"><i>1</i>First summary</div>
+            <div class="bd" id="bd-2"><i>R</i>Quiet route</div>
+            <div class="bd" id="bd-3"><i>0</i>Silent day</div>
+          </div>
+        </div>
+        <div class="card"><h3>Your week</h3><div class="stats"><p><b class="big">312</b><br><span class="small muted">messages muted</span></p><p><b class="big">≈ 26 min</b><br><span class="small muted">reading saved</span></p></div></div>
+      </section>
+
+    </div>
+
+    <nav class="tabs" id="tabs" hidden aria-label="Prototype navigation">
+      <button type="button" data-go="digest"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></svg><span>Summary</span></button>
+      <button type="button" data-go="map"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h6a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6"/></svg><span>Map</span></button>
+      <button type="button" data-go="auto"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg><span>Autopilot</span></button>
+      <button type="button" data-go="avoid"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="8" r="3.5"/><path d="M3.5 20c.6-3.6 3-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M17.5 5.5l4 4M21.5 5.5l-4 4"/></svg><span>Avoid</span></button>
+      <button type="button" data-go="play"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".6"/></svg><span>Play</span></button>
+    </nav>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
