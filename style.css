@@ -176,6 +176,18 @@ input[type=text]{width:100%;min-height:2.6rem;background:var(--bg);border:1px so
 .sep{justify-self:center;font:500 .66rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.12rem .65rem;margin-block:.3rem}
 .qr{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:center;margin-top:.6rem;max-width:26rem}
 .qr[hidden]{display:none}
-.qr-tile{width:9.5rem;background:#fff;border:1px solid var(--line);border-radius:.8rem;padding:.35rem;line-height:0}
-.qr-tile svg{width:100%;height:auto;display:block}
+.qr-tile{
+  width:9.5rem;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:.8rem;
+  padding:.35rem;
+  line-height:0;
+}
+
+.qr-tile img{
+  width:100%;
+  height:auto;
+  display:block;
+}
 .qr b{font:600 1rem var(--f-display)}
